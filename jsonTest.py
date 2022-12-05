@@ -2,12 +2,12 @@ import json
 
 print("break")
 
-f = open('json_files/testNetworkData.json')
+with open("/Users/ikshulbethur/Documents/Projects/ML-Library/json_files/testNetworkData.json", 'r') as f:
+    networkData = json.load(f)
 
-networkData = json.load(f)
+with open("Data.json", "w") as e:
+    json.dump(networkData, e)
 
-for i in networkData['L2']:
-    dat = i['N1']
-    print(dat['w'])
+print(networkData['L1'])
 
 f.close()

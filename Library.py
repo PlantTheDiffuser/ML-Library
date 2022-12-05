@@ -94,16 +94,10 @@ class Network:
             self.layers[i].layerExe(self.layers[i-1].outputs)
             
         return self.layers[self.size - 1].outputs
+    
+    def save(self):
+        return
 
 class Train:
     def __init__(self):
         return
-
-testNetworkLayerSizes = [2, 3, 2]
-testInputs = [2, 2]
-
-testNetwork = Network(testNetworkLayerSizes)
-
-print(testNetwork.exe(testInputs))
-
-print("Break")
