@@ -96,8 +96,16 @@ class Network:
         return self.layers[self.size - 1].outputs
     
     def save(self):
+        for i in range(self.size - 1):
+            for n in range(self.layerSizes[i + 1]):
+                networkData.append([0] * (self.layerSizes[i] + 1))
+        
         return
 
 class Train:
     def __init__(self):
         return
+
+networkData = []
+
+#networkData = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
