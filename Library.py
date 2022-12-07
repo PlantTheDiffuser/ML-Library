@@ -14,9 +14,12 @@ class node:
         self.buildNode()
 
     def buildNode(self):
+        global counter
         for i in range(self.size):
-            self.weights.append(random.random())
-        bias = random.random()
+            self.weights.append(networkData[counter][i])
+            
+        bias = networkData[counter][self.size - 1]
+        counter += 1
 
     #Activation funcion applied after each neuron calculation
     def sigmoid(self, x):
@@ -71,14 +74,11 @@ class Network:
     #layerSizes #[int] - Size of each layer | [2, 3, 2]
     #[layer] - holds each layer | [layer, layer, layer]
 
-    #I/O
-    #inputs
-    #outputs
-
-    def __init__(self, layerSizes):
+    def __init__(self, layerSizes, networkData):
         self.size = len(layerSizes)
         self.layerSizes = layerSizes
         self.layers = [inputLayer(layerSizes[0])]
+        self.networkData = networkData
         self.create()
 
     def create(self):
@@ -94,18 +94,16 @@ class Network:
             self.layers[i].layerExe(self.layers[i-1].outputs)
             
         return self.layers[self.size - 1].outputs
-    
-    def save(self):
-        for i in range(self.size - 1):
-            for n in range(self.layerSizes[i + 1]):
-                networkData.append([0] * (self.layerSizes[i] + 1))
-        
-        return
 
 class Train:
     def __init__(self):
         return
 
+""" def save(self):
+        for i in range(self.size - 1):
+            for n in range(self.layerSizes[i + 1]):
+                networkData.append([0] * (self.layerSizes[i] + 1))
+        
+        return """
 networkData = []
-
-#networkData = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+counter = 0
