@@ -74,6 +74,8 @@ class Network:
     #layerSizes #[int] - Size of each layer | [2, 3, 2]
     #[layer] - holds each layer | [layer, layer, layer]
 
+    roundDigit = 5
+
     def __init__(self, layerSizes, networkData):
         self.size = len(layerSizes)
         self.layerSizes = layerSizes
@@ -93,7 +95,10 @@ class Network:
         for i in range(1, self.size):
             self.layers[i].layerExe(self.layers[i-1].outputs)
             
-        return self.layers[self.size - 1].outputs
+            output = self.layers[self.size - 1].outputs
+            output[0] = round(output[0], self.roundDigit)
+            output[1] = round(output[1], self.roundDigit)
+        return output
 
 class Train:
     def __init__(self):
